@@ -1,0 +1,15 @@
+FROM ubuntu:20.04
+
+RUN apt-get update
+RUN mkdir scripts
+RUN mkdir repo
+
+RUN apt-get install -y nginx
+RUN apt-get install -y git
+
+ADD git-script.sh /scripts/
+RUN ./scripts/git-script.sh
+
+ENTRYPOINT [ "/usr/sbin/nginx", "-g", "daemon off;" ]
+
+EXPOSE 80
